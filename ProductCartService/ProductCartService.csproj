@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.2" />
+    <PackageReference Include="Rebus" Version="8.4.2" />
+    <PackageReference Include="Rebus.RabbitMq" Version="9.3.0" />
+    <PackageReference Include="Rebus.ServiceProvider" Version="10.1.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj" />
+    <ProjectReference Include="..\Database\Database.csproj" />
+    <ProjectReference Include="..\DataModel\DataModel.csproj" />
+    <ProjectReference Include="..\Events\Events.csproj" />
+    <ProjectReference Include="..\MicroServiceBase\MicroServiceBase.csproj" />
+    <ProjectReference Include="..\RemoteRESTClients\RemoteRESTClients.csproj" />
+  </ItemGroup>
+
+</Project>
