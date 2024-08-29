@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj" />
     <ProjectReference Include="..\DataModel\DataModel.csproj" />
+    <ProjectReference Include="..\Events\Events.csproj" />
     <ProjectReference Include="..\MicroServiceBase\MicroServiceBase.csproj" />
   </ItemGroup>
 

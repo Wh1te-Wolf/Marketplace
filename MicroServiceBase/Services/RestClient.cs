@@ -1,6 +1,7 @@
 ﻿using MicroServiceBase.Interfaces;
 using MicroServiceBase.Utils;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Net.Mime;
 using System.Text;
 
@@ -66,7 +67,7 @@ namespace MicroServiceBase.Services
             return result;
         }
 
-        public async Task<string> PatchAsync(string url, string? token, string body, CancellationToken cancellationToken = default)
+        public async Task<string> PatchAsync(string url, string body, string? token, CancellationToken cancellationToken = default)
         {
             using HttpClient client = _httpClientFactory.CreateClient(HttpClientName);
             using HttpRequestMessage httpRequestMessage = new HttpRequestBuilder()
@@ -86,14 +87,14 @@ namespace MicroServiceBase.Services
             return content;
         }
 
-        public async Task<T> PatchAsync<T>(string url, string? token, string body, CancellationToken cancellationToken = default)
+        public async Task<T> PatchAsync<T>(string url, string body, string? token, CancellationToken cancellationToken = default)
         {
-            string response = await PatchAsync(url, token, body, cancellationToken);
+            string response = await PatchAsync(url, body, token, cancellationToken);
             T result = JsonConvert.DeserializeObject<T>(response);
             return result;
         }
 
-        public async Task<string> PostAsync(string url, string? token, string body, CancellationToken cancellationToken = default)
+        public async Task<string> PostAsync(string url, string body, string? token, CancellationToken cancellationToken = default)
         {
             using HttpClient client = _httpClientFactory.CreateClient(HttpClientName);
             using HttpRequestMessage httpRequestMessage = new HttpRequestBuilder()
@@ -113,14 +114,14 @@ namespace MicroServiceBase.Services
             return content;
         }
 
-        public async Task<T> PostAsync<T>(string url, string? token, string body, CancellationToken cancellationToken = default)
+        public async Task<T> PostAsync<T>(string url, string body, string? token, CancellationToken cancellationToken = default)
         {
-            string response = await PostAsync(url, token, body, cancellationToken);
+            string response = await PostAsync(url, body, token, cancellationToken);
             T result = JsonConvert.DeserializeObject<T>(response);
             return result;
         }
 
-        public async Task<string> PutAsync(string url, string? token, string body, CancellationToken cancellationToken = default)
+        public async Task<string> PutAsync(string url, string body, string? token, CancellationToken cancellationToken = default)
         {
             using HttpClient client = _httpClientFactory.CreateClient(HttpClientName);
             using HttpRequestMessage httpRequestMessage = new HttpRequestBuilder()
@@ -140,9 +141,9 @@ namespace MicroServiceBase.Services
             return content;
         }
 
-        public async Task<T> PutAsync<T>(string url, string? token, string body, CancellationToken cancellationToken = default)
+        public async Task<T> PutAsync<T>(string url, string body, string? token, CancellationToken cancellationToken = default)
         {
-            string response = await PutAsync(url, token, body, cancellationToken);
+            string response = await PutAsync(url, body, token, cancellationToken);
             T result = JsonConvert.DeserializeObject<T>(response);
             return result;
         }

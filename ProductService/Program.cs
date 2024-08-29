@@ -28,6 +28,7 @@ namespace ProductService
             builder.Services.AddScoped<IProductService, Services.ProductService>();
             builder.Services.AddScoped<IProductPriceService, ProductPriceService>();
             builder.Services.AddScoped<IProductTypeService, ProductTypeService>();
+
             string connectionString = builder.Configuration.GetConnectionString("Postgres");
             builder.Services.AddDbContext<ProductServiceContext>(options => options.UseNpgsql(connectionString));
             builder.Services.Configure<ApiBehaviorOptions>(options =>

@@ -1,5 +1,3 @@
-
-using Events;
 using Events.Options;
 using Events.Services;
 using Events.Services.Interfaces;
@@ -10,18 +8,15 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProductCartService.AutoMapper;
 using ProductCartService.EventHandlers;
+using ProductCartService.EventHandlers.CustomerRemoveSaga;
+using ProductCartService.EventHandlers.CustomerCreateSaga;
 using ProductCartService.Repositories;
 using ProductCartService.Repositories.EF;
 using ProductCartService.Repositories.Interfaces;
 using ProductCartService.Services;
 using ProductCartService.Services.Hosted;
 using ProductCartService.Services.Interfaces;
-using Rebus.Activation;
-using Rebus.Bus;
 using Rebus.Config;
-using Rebus.Persistence.InMem;
-using Rebus.Routing.TypeBased;
-using Rebus.Serialization.Json;
 using RemoteRESTClients.Interfaces;
 using RemoteRESTClients.RESTClients;
 
@@ -64,6 +59,8 @@ namespace ProductCartService
 
             builder.Services.AddScoped<CustomerCreatedEventHandler>();
             builder.Services.AddScoped<CustomerRemovedEventHandler>();
+            builder.Services.AddScoped<RemoveProductCardHandler>();
+            builder.Services.AddScoped<CreateProductCartHandler>();
 
             builder.Services.Configure<ApiBehaviorOptions>(options =>
             {

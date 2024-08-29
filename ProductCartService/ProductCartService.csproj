@@ -26,6 +26,7 @@
     <ProjectReference Include="..\Events\Events.csproj" />
     <ProjectReference Include="..\MicroServiceBase\MicroServiceBase.csproj" />
     <ProjectReference Include="..\RemoteRESTClients\RemoteRESTClients.csproj" />
+    <ProjectReference Include="..\SagaEventData\SagaEventData.csproj" />
   </ItemGroup>
 
 </Project>

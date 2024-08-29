@@ -18,13 +18,13 @@ namespace ProductService.Repositories
         public override async Task<IReadOnlyCollection<Product>> GetAllAsync(IEnumerable<string>? toInclude = null)
         {
             return await _productServiceContext.Products
-                .Include(p => p.Prices).ToListAsync();
+                .Include(p => p.Prices).AsNoTracking().ToListAsync();
         }
 
         public override async Task<Product?> GetAsync(Guid uuid, IEnumerable<string>? toInclude = null)
         {
             return await _productServiceContext.Products
-                .Include(p => p.Prices)
+                .Include(p => p.Prices).AsNoTracking()
                 .FirstOrDefaultAsync(p => p.UUID == uuid);
         }
 
@@ -32,7 +32,7 @@ namespace ProductService.Repositories
         {
             return await _productServiceContext.Products
                 .Where(e => uuids.Contains(e.UUID))
-                .Include(p => p.Prices)
+                .Include(p => p.Prices).AsNoTracking()
                 .ToListAsync();
         }
     }

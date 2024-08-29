@@ -4,6 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>72b23c71-0bc2-4c05-a0c4-6ad75e3b1d3e</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,6 +27,9 @@
     <ProjectReference Include="..\Database\Database.csproj" />
     <ProjectReference Include="..\Events\Events.csproj" />
     <ProjectReference Include="..\MicroServiceBase\MicroServiceBase.csproj" />
+    <ProjectReference Include="..\RemoteRESTClients\RemoteRESTClients.csproj" />
+    <ProjectReference Include="..\SagaEventData\SagaEventData.csproj" />
+    <ProjectReference Include="..\TwoPhaseCommitUtils\TwoPhaseCommitUtils.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -25,10 +25,8 @@ public class HandlerRepository : IHandlerRepository
         using IServiceScope serviceScope = _serviceProvider.CreateScope();
 
         IEventHandler? eventHandler = serviceScope.ServiceProvider.GetRequiredService(handlerType) as IEventHandler;
-        if (eventHandler is null)
-           return;
 
-        await eventHandler.HandleAsync(marketplaceEvent);
+        await eventHandler?.HandleAsync(marketplaceEvent);
     }
 
     public Task Initialize()

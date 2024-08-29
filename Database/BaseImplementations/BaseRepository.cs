@@ -37,13 +37,13 @@ public class BaseRepository<T> : IBaseRepository<T> where T : class, IEntity, ne
 
     public virtual async Task<T?> GetAsync(Guid uuid, IEnumerable<string>? toInclude = null)
     {
-        IQueryable<T> query = _dbContext.Set<T>().Where(e => e.UUID == uuid);
+        IQueryable<T> query = _dbContext.Set<T>().Where(e => e.UUID == uuid).AsNoTracking();
         return await query.FirstOrDefaultAsync();
     }
 
     public virtual async Task<IReadOnlyCollection<T>> GetAsync(IEnumerable<Guid>? uuids, IEnumerable<string>? toInclude = null)
     {
-        IQueryable<T> query = _dbContext.Set<T>().Where(e => uuids.Contains(e.UUID));
+        IQueryable<T> query = _dbContext.Set<T>().Where(e => uuids.Contains(e.UUID)).AsNoTracking();
         return await query.ToListAsync();
     }
 
@@ -87,7 +87,7 @@ public class BaseRepository<T> : IBaseRepository<T> where T : class, IEntity, ne
                 predicate = predicate.And(BuildPredicate<T>(condition));
             }
 
-            query = query.Where(predicate);
+            query = query.Where(predicate).AsNoTracking();
         }
         if (!string.IsNullOrEmpty(orderBy))
         {

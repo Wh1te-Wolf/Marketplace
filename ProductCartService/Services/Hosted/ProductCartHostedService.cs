@@ -2,6 +2,7 @@
 using Events.Options;
 using Events.Services.Interfaces;
 using ProductCartService.EventHandlers;
+using ProductCartService.EventHandlers.CustomerRemoveSaga;
 
 namespace ProductCartService.Services.Hosted
 {
@@ -20,33 +21,21 @@ namespace ProductCartService.Services.Hosted
         {
             TopicFilterStack topicFilterStack = new TopicFilterStack()
             { 
-                Topic = Topics.MainTopic,
+                Topic = Topics.TransactionTopic,
                 Actions = new List<ActionFilterStack>()
                 { 
                     new ActionFilterStack() 
                     {
-                        EventType = "Customer",
-                        EventSubType = "Created",
+                        EventType = "CustomerRemoveSaga",
+                        EventSubType = "CustomerRemove.Commited",
                         Handlers = new List<HandlerConfiguration>() 
                         {
                             new HandlerConfiguration()
                             { 
-                                HandlerPath = typeof(CustomerCreatedEventHandler).FullName
+                                HandlerPath = typeof(RemoveProductCardHandler).FullName
                             }
                         }
                     },
-                    new ActionFilterStack()
-                    {
-                        EventType = "Customer",
-                        EventSubType = "Removed",
-                        Handlers = new List<HandlerConfiguration>()
-                        {
-                            new HandlerConfiguration()
-                            {
-                                HandlerPath = typeof(CustomerRemovedEventHandler).FullName
-                            }
-                        }
-                    }
                 }
             };
 

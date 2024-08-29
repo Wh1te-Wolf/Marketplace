@@ -3,6 +3,9 @@ using Events;
 using Events.Options;
 using Events.Services;
 using Events.Services.Interfaces;
+using MicroServiceBase.Interfaces;
+using MicroServiceBase.Options;
+using MicroServiceBase.Services;
 using Microsoft.EntityFrameworkCore;
 using NLog.Web;
 using Rebus.Bus;
@@ -10,7 +13,11 @@ using Rebus.Config;
 using Rebus.Persistence.InMem;
 using Rebus.Routing.TypeBased;
 using Rebus.Serialization.Json;
+using RemoteRESTClients.Interfaces;
+using RemoteRESTClients.RESTClients;
 using UserService.AutoMapper;
+using UserService.EventHandlers.CustomerCreateSaga;
+using UserService.EventHandlers.CustomerRemoveSaga;
 using UserService.Repositories;
 using UserService.Repositories.EF;
 using UserService.Repositories.Interfaces;
@@ -44,6 +51,17 @@ namespace UserService
             builder.Services.AddHostedService<UserHostedService>();
             IConfigurationSection? eventManagerConfigSection = builder.Configuration.GetSection(nameof(EventManagerConnectionOptions));
             builder.Services.Configure<EventManagerConnectionOptions>(eventManagerConfigSection);
+            builder.Services.AddScoped<CreateUserHandler>();
+            builder.Services.AddScoped<RemoveUserHandler>();
+            builder.Services.AddScoped<CreateUserSagaHandler>();
+            builder.Services.AddScoped<RemoveUserSagaHandler>();
+            builder.Services.AddSingleton<IRestClient, RestClient>();
+            builder.Services.AddHttpClient(nameof(RestClient));
+
+            IConfigurationSection? serviceLocationConfigSection = builder.Configuration.GetSection(nameof(ServiceLocationOptions));
+            builder.Services.Configure<ServiceLocationOptions>(serviceLocationConfigSection);
+
+            builder.Services.AddScoped<ISagaRemoteProcessManager, SagaRemoteProcessManagerRESTClient>();
 
             //builder.Services.AddRebus(configure =>
             //{

@@ -5,5 +5,6 @@
         public const string ProductCartService = "ProductCartService";
         public const string ProductService = "ProductService";
         public const string ProductCommentService = "ProductCommentService";
+        public const string SagaManager = "SagaManager";
     }
 }
